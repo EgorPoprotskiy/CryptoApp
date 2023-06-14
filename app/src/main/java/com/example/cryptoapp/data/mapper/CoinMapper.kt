@@ -9,9 +9,9 @@ import com.google.gson.Gson
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
-
+//преобразовывает одни объекты в другие
 class CoinMapper {
-
+    //Преобразовывает Dto в модель БД
     fun mapDtoToDbModel(dto: CoinInfoDto) = CoinInfoDbModel(
         fromSymbol = dto.fromSymbol,
         toSymbol = dto.toSymbol,
@@ -22,7 +22,7 @@ class CoinMapper {
         lastMarket = dto.lastMarket,
         imageUrl = BASE_IMAGE_URL + dto.imageUrl
     )
-
+    //Преобразовывает json-контейнер в коллекцию объектов CoinInfoDto
     fun mapJsonContainerToListCoinInfo(jsonContainer: CoinInfoJsonContainerDto): List<CoinInfoDto> {
         val result = mutableListOf<CoinInfoDto>()
         val jsonObject = jsonContainer.json ?: return result
@@ -40,13 +40,13 @@ class CoinMapper {
         }
         return result
     }
-
+    //Преобразовывает CoinNamesListDto в строку, в которой все валюты будут расположены через запятую
     fun mapNamesListToString(namesListDto: CoinNamesListDto): String {
         return namesListDto.names?.map {
             it.coinName?.name
         }?.joinToString(",") ?: ""
     }
-
+    //Преобразовывает модель БД в сущность domain-слоя
     fun mapDbModelToEntity(dbModel: CoinInfoDbModel) = CoinInfo(
         fromSymbol = dbModel.fromSymbol,
         toSymbol = dbModel.toSymbol,
