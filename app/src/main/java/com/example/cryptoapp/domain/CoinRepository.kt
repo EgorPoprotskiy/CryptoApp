@@ -9,5 +9,5 @@ interface CoinRepository {
     fun getCoinInfo(fromSymbol: String): LiveData<CoinInfo>
     //загрузка данных(этот процесс асинхронный и его нельзя выполнять на главном потоке,
     //поэтому метод помечен suspend
-    suspend fun loadData()
+    fun loadData()
 }
